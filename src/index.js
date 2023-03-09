@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const { PORT } = require("./config/serverConfig");
+const jobs = require("./utils/jobs");
 // const { sendBasicEmail } = require("./services/email-service");
 const cron = require("node-cron");
 const app = express();
@@ -13,7 +14,7 @@ const setUpAndStartServer = () => {
   // app.use("/api", apiRoutes);
   app.listen(PORT, () => {
     console.log(`Reminder Service server started at port ${PORT}`);
-
+    jobs();
     // sendBasicEmail(
     //   `Support <support@admin.com>`,
     //   "marote1450@wwgoc.com",
