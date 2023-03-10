@@ -22,7 +22,18 @@ const fetchPendingEmails = async (timeStamp) => {
     const response = await repo.getAll();
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
-module.exports = { sendBasicEmail, fetchPendingEmails };
+const createNotification = async (data) => {
+  try {
+    const response = await repo.create(data);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+module.exports = { sendBasicEmail, fetchPendingEmails, createNotification };

@@ -10,7 +10,7 @@ const emailService = require("../services/email-service");
  */
 
 const setUpJobs = () => {
-  cron.schedule("*/5 * * * *", async () => {
+  cron.schedule("*/1 * * * *", async () => {
     const response = await emailService.fetchPendingEmails();
     console.log(response);
   });

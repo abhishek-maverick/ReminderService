@@ -9,6 +9,15 @@ class TicketRepository {
       throw error;
     }
   }
+
+  async create(data) {
+    try {
+      const ticket = NotificationTicket.create(data);
+      return ticket;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = TicketRepository;

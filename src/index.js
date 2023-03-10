@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const db = require("./models/index");
 
 const { PORT } = require("./config/serverConfig");
 const jobs = require("./utils/jobs");
@@ -20,10 +21,7 @@ const setUpAndStartServer = () => {
     //   "marote1450@wwgoc.com",
     //   "Greetings, from flight booking service",
     //   "hey, how are you ? I hope you like the support"
-    // );
-    cron.schedule("*/2 * * * *", () => {
-      console.log("running a task every two minutes");
-    });
+    // )
 
     if (process.env.DB_SYNC) {
       db.sequelize.sync({ alter: true });
