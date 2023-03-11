@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const db = require("./models/index");
 
 const { PORT } = require("./config/serverConfig");
+const TicketController = require("./controllers/ticket-controller");
 const jobs = require("./utils/jobs");
 // const { sendBasicEmail } = require("./services/email-service");
 const cron = require("node-cron");
@@ -11,8 +12,8 @@ const app = express();
 const setUpAndStartServer = () => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.post("/api/v1/tickets", TicketController.create);
 
-  // app.use("/api", apiRoutes);
   app.listen(PORT, () => {
     console.log(`Reminder Service server started at port ${PORT}`);
     jobs();

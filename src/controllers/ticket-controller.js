@@ -1,17 +1,19 @@
-const { request } = require("express");
+const { ConnectionAcquireTimeoutError } = require("sequelize");
 const TicketService = require("../services/email-service");
 
 const create = async (req, res) => {
   try {
+    console.log("inside controller");
+    console.log(req.body);
     const response = await TicketService.createNotification(req.body);
-    return request.statusCode(201).json({
+    return res.status(201).json({
       success: true,
       data: response,
       err: {},
       message: "Successfully registered as email reminder",
     });
   } catch (error) {
-    return request.statusCode(500).json({
+    return res.status(500).json({
       success: false,
       data: {},
       err: error,
