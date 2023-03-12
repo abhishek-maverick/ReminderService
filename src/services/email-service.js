@@ -19,7 +19,9 @@ const sendBasicEmail = async (mailFrom, mailTo, mailSubject, mailBody) => {
 
 const fetchPendingEmails = async (timeStamp) => {
   try {
-    const response = await repo.getAll();
+    const response = await repo.get({
+      status: "PENDING",
+    });
     return response;
   } catch (error) {
     console.log(error);
@@ -29,8 +31,6 @@ const fetchPendingEmails = async (timeStamp) => {
 
 const createNotification = async (data) => {
   try {
-    console.log("data is");
-    console.log(data);
     const response = await repo.create(data);
     return response;
   } catch (error) {

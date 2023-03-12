@@ -3,8 +3,6 @@ const TicketService = require("../services/email-service");
 
 const create = async (req, res) => {
   try {
-    console.log("inside controller");
-    console.log(req.body);
     const response = await TicketService.createNotification(req.body);
     return res.status(201).json({
       success: true,
