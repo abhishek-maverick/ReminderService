@@ -7,16 +7,20 @@ const TicketController = require("./controllers/ticket-controller");
 const jobs = require("./utils/jobs");
 // const { sendBasicEmail } = require("./services/email-service");
 const cron = require("node-cron");
+const { createChannel } = require("./utils/messageQueue");
 const app = express();
 
-const setUpAndStartServer = () => {
+const setUpAndStartServer = async () => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  const channel = await createChannel();
+
   app.post("/api/v1/tickets", TicketController.create);
 
   app.listen(PORT, () => {
     console.log(`Reminder Service server started at port ${PORT}`);
-    jobs();
+    // jobs();
     // sendBasicEmail(
     //   `Support <support@admin.com>`,
     //   "marote1450@wwgoc.com",
